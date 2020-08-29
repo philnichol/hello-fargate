@@ -1,6 +1,7 @@
-name = "hello-ctm"
-env  = "dev"
-
+name      = "hello-ctm"
+env       = "dev"
+image_tag = "0.0.1"
+region    = "eu-west-1"
 public_subnets = [
   {
     cidr_block        = "10.0.0.0/24"

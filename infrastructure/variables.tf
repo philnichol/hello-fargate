@@ -5,6 +5,10 @@ variable "env" {
 
 }
 
+variable "region" {
+
+}
+
 variable "public_subnets" {
   type = list(object({
     cidr_block        = string
@@ -23,4 +27,8 @@ variable "private_subnets" {
 
 variable "container_port" {
   default = 5000
+}
+
+variable "image_tag" {
+  description = "the container image tag to use"
 }
