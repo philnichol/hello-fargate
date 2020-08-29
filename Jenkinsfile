@@ -10,28 +10,6 @@ pipeline {
     environment {
         ACCOUNT_NUMBER = "12345678"
         AWS_CREDENTIALS = "aws-jenkins-credentials"
-        ECR_REGION = sh(
-            returnStdout: true,
-            script: "grep -e region infrastructure/terraform.tfvars | cut -d '=' -f 2 | tr -d '[:space:]' | tr -d '\"'"
-        )
-        NAME = sh(
-            returnStdout: true,
-            script: "grep -e name infrastructure/terraform.tfvars | cut -d '=' -f 2 | tr -d '[:space:]' | tr -d '\"'"
-        )
-        ENV = sh(
-            returnStdout: true,
-            script: "grep -e env infrastructure/terraform.tfvars | cut -d '=' -f 2 | tr -d '[:space:]' | tr -d '\"'"
-        )
-        IMAGE_TAG = sh(
-            returnStdout: true,
-            script: "grep -e image_tag infrastructure/terraform.tfvars | cut -d '=' -f 2 | tr -d '[:space:]' | tr -d '\"'"
-        )
-        GIT_REF = sh(
-            returnStdout: true,
-            script: "git log -n 1 --pretty=format:'%h'"
-        ).trim()
-        ECR_NAME = "${ACCOUNT_NUMBER}.dkr.ecr.${ECR_REGION}.amazonaws.com"
-        IMAGE_NAME = "${ECR_NAME}/${NAME}-${ENV}"
     }
 
     options {
@@ -42,13 +20,15 @@ pipeline {
     stages {
         stage("Prep") {
             steps {
-                sh '''
-                    make prep
-                    make tffmt
-                    make tfinit
-                    make tfvalidate
-                    make codelogin
-                '''
+                withCredentials(${AWS_CREDENTIALS}) {
+                    sh '''
+                        make prep
+                        make tffmt
+                        make tfinit
+                        make tfvalidate
+                        make codelogin
+                    '''
+                }
             }
         }
         stage("CreateECR") {
@@ -57,9 +37,11 @@ pipeline {
                 branch 'main'
             }
             steps {
-                sh '''
-                    make tfecrapply
-                '''
+                withCredentials(${AWS_CREDENTIALS}) {
+                    sh '''
+                        make tfecrapply
+                    '''
+                }
             }
         }
         stage("BuildCode") {
@@ -75,9 +57,11 @@ pipeline {
                 branch 'main'
             }
             steps {
-                sh '''
-                    make codepush
-                '''
+                withCredentials(${AWS_CREDENTIALS}) {
+                    sh '''
+                        make codepush
+                    '''
+                }
             }
         }
         stage("BuildInfra") {
@@ -86,9 +70,11 @@ pipeline {
                 branch 'main'
             }
             steps {
-                sh '''
-                    make tfapply
-                '''
+                withCredentials(${AWS_CREDENTIALS}) {
+                    sh '''
+                        make tfapply
+                    '''
+                }
             }
         }
     }
