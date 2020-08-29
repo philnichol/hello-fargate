@@ -1,5 +1,5 @@
 # multi stage docker build, while not required for this image, if requirements.txt
-# ever requires additional dependencies, it will reduce final image size
+# ever requires additional build-time dependencies, it will reduce final image size
 FROM python:3.7.7-alpine3.11 AS build-image
 
 RUN python3 -m venv /opt/venv
@@ -10,6 +10,7 @@ COPY requirements.txt ./
 
 RUN pip install -r requirements.txt
 
+# runtime image
 FROM python:3.7.7-alpine3.11 AS runtime-image
 
 COPY --from=build-image /opt/venv /opt/venv
