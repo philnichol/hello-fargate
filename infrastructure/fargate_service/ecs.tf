@@ -12,16 +12,17 @@ data "template_file" "container_definition" {
   template = file("${path.module}/templates/container_def_template.json")
 
   vars = {
-    image_url        = "${var.repo_url}/${var.image_name}:${var.image_tag}"
-    name             = var.name
-    env              = var.env
-    cpu              = var.cpu
-    memory           = var.memory
-    log_group_name   = "${var.name}-${var.env}"
-    log_group_region = var.region
-    greeting         = var.greeting
-    time_format      = var.time_format
-    port             = var.container_port
+    image_url           = "${var.repo_url}:${var.image_tag}"
+    name                = var.name
+    env                 = var.env
+    cpu                 = var.cpu
+    memory              = var.memory
+    log_group_name      = "${var.name}-${var.env}"
+    log_group_region    = var.region
+    greeting            = var.greeting
+    time_format         = var.time_format
+    port                = var.container_port
+    healthcheck_command = var.healthcheck_command
   }
 }
 
@@ -32,8 +33,8 @@ resource "aws_ecs_task_definition" "task" {
   requires_compatibilities = ["FARGATE"]
   cpu                      = var.cpu
   memory                   = var.memory
-  execution_role_arn = aws_iam_role.exec.arn
-  task_role_arn = aws_iam_role.task.arn
+  execution_role_arn       = aws_iam_role.exec.arn
+  task_role_arn            = aws_iam_role.task.arn
 }
 
 resource "aws_ecs_service" "svc" {

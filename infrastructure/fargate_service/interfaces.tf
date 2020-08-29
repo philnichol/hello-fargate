@@ -59,11 +59,6 @@ variable "repo_url" {
   description = "ECR repo"
 }
 
-variable "image_name" {
-  type        = string
-  description = "container image name"
-}
-
 variable "image_tag" {
   type        = string
   description = "container image tag"
@@ -86,4 +81,18 @@ variable "cluster_id" {
   type        = string
   description = "The ECS cluster ID, leave blank to create one"
   default     = null
+}
+
+variable "healthcheck_command" {
+  type        = string
+  description = "container healthcheck command, defaults to flask command on port 5000 which requires curl"
+  default     = "curl -s -k -o /dev/null --write-out %%{http_code} 127.0.0.1:5000 | grep 200 || exit 1"
+}
+
+output "task_exec_role" {
+  value = aws_iam_role.exec.arn
+}
+
+output "task_role" {
+  value = aws_iam_role.task.arn
 }
