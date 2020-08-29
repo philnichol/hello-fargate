@@ -1,0 +1,11 @@
+# Hello-CTM Code
+
+## This folder consists of possibly the most basic flask app ever created and a Dockerfile
+
+## Flask
+Just returns a greeting and the time, while there are defaults, you can pass in a custom greeting and time format via ENV VARS.
+
+# Docker
+- Uses alpine as a base to keep the image small and reduce attack vector
+- Uses a multi-stage docker container, which at this point is massive overkill, but if requirements.txt ever grows, this will ensure build/compile time dependencies don't have to be included into the runtime image.
+- Since it runs on Fargate, curl has to be installed for healthchecks. If ever moved to k8s this can be removed. 
