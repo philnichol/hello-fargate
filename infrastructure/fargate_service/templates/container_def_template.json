@@ -1,0 +1,30 @@
+[{
+    "image": "${image_url}",
+    "name": "${name}",
+    "cpu": ${cpu},
+    "memoryReservation": ${memory},
+    "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+            "awslogs-group": "${log_group_name}",
+            "awslogs-region": "${log_group_region}",
+            "awslogs-stream-prefix": "${name}-${env}-logs"
+        }
+    },
+    "essential": true,
+    "environment": [
+      {
+        "name": "GREETING",
+        "value": "${greeting}"
+      },
+      {
+          "name": "TIME_FORMAT",
+          "value": "${time_format}"
+      }
+    ],
+    "portMappings": [{
+        "hostPort": ${port},
+        "containerPort": ${port},
+        "protocol": "tcp"
+    }]
+}]
