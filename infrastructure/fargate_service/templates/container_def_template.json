@@ -18,8 +18,8 @@
             "${healthcheck_command}"
         ],
         "timeout": 5,
-        "interval": 30,
-        "startPeriod": 30
+        "interval": 15,
+        "startPeriod": 10
     },
     "essential": true,
     "environment": [
