@@ -5,6 +5,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
+    # get greeting/timeformat from envvars, with sensible defaults
     greeting = os.environ.get("GREETING", "hello CTM!")
     time_format = os.environ.get("TIME_FORMAT", "%d/%m/%Y, %H:%M:%S")
     now = datetime.datetime.now().strftime(time_format)
