@@ -1,5 +1,9 @@
 # hello-ctm
 
+## The task
+Create a clustered web service in AWS that respond to a GET request with "hello world" and the date and time.
+
+
 ## Pipeline
 In order to be able to test this locally and keep things platform-agnostic, I went with a Makefile.  
 I haven't really worked much with Makefiles before so this was a good learning experience.
