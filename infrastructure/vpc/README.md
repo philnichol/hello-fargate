@@ -1,6 +1,6 @@
 # AWS VPC Module
 
-Creates a VPC and at least 1 public and 1 private subnet inc. IGW, NAT and required route tables)
+Creates a VPC and at least 1 public and 1 private subnet inc. IGW, NAT and required route tables
 
 ## Requirements
 

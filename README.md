@@ -1,9 +1,17 @@
 # hello-ctm
 
 ## The task
-Create a clustered web service in AWS that respond to a GET request with "hello world" and the date and time.
+Create a clustered web service in AWS that responds to a GET request with "hello world" and the date and time.
 
+---
+## Diagram
+![alt text](hello-ctm.png "Diagram")
 
+---
+## My solution
+I went with AWS Fargate, I thought it suited a single service better than standing up a whole k8s cluster and dealing with the overhead.
+
+---
 ## Pipeline
 In order to be able to test this locally and keep things platform-agnostic, I went with a Makefile.  
 I haven't really worked much with Makefiles before so this was a good learning experience, picked it up from some colleagues at work. 
@@ -43,3 +51,11 @@ To destroy the infra (with prompt for confirmation):
 ```shell
 make destroy
 ```
+
+---
+## Documentation
+Further documentation can be found within each subfolder of this repo:
+- [Infrastructure](infrastructure/README.md)
+- [Fargate Module](infrastructure/fargate_service/README.md)
+- [VPC Module](infrastructure/vpc/README.md)
+- [Code](code/README.md)
