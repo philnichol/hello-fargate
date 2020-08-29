@@ -55,7 +55,7 @@ make destroy
 ---
 ## Documentation
 Further documentation can be found within each subfolder of this repo:
-- [Infrastructure](infrastructure/README.md)
-- [Fargate Module](infrastructure/fargate_service/README.md)
-- [VPC Module](infrastructure/vpc/README.md)
-- [Code](code/README.md)
+- [Infrastructure](infrastructure/)
+- [Fargate Module](infrastructure/fargate_service/)
+- [VPC Module](infrastructure/vpc/)
+- [Code](code/)
