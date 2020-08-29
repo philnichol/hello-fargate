@@ -46,7 +46,7 @@ codepush: codebuild
 		|| exit 1; \
 		popd
 
-tffmt codepush:
+tffmt: codepush
 	pushd infrastructure \
 		&& terraform fmt -recursive -list=true -check=true \
 		|| exit 1; \
