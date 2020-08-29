@@ -69,3 +69,9 @@ tfapply: tfvalidate
 		&& terraform apply \
 		|| exit 1; \
 		popd
+
+tfdestroy: tfinit
+	pushd infrastructure \
+		&& terraform destroy \
+		|| exit 1; \
+		popd

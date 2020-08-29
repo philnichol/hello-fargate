@@ -1,5 +1,9 @@
 # hello-ctm
 
+## Pipeline
+In order to be able to test this locally and keep things platform-agnostic, I went with a Makefile.  
+I haven't really worked much with Makefiles before so this was a good learning experience.
+
 ---
 ## Usage
 
@@ -12,10 +16,16 @@ The following applications must be installed:
 - docker (daemon must be running)
 - terraform
 
+To create the infra:
 ```shell
 git clone https://github.com/philnichol/hello-ctm.git
 cd hello-ctm
 make tfapply
+```
+
+To destroy the infra:
+```shell
+make tfdestroy
 ```
 
 You will be prompted for confirmation from terraform.
