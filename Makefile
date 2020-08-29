@@ -97,6 +97,9 @@ tfdestroy:
 
 prep: checkdependencies checkvariables
 
+runlocal: prep codebuild
+	docker run -d -p 5000:5000 $(full_image_path)
+
 destroy: prep tfinit tfdestroy
 
 all: prep tffmt tfinit tfvalidate tfecrapply codelogin codebuild codepush tfapply
