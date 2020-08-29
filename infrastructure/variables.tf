@@ -1,12 +1,13 @@
 variable "name" {
+  description = "The name of your project"
 }
 
 variable "env" {
-
+  description = "Which environemnt (dev|uat|prod)"
 }
 
 variable "region" {
-
+  description = "The AWS region"
 }
 
 variable "public_subnets" {
@@ -26,7 +27,8 @@ variable "private_subnets" {
 }
 
 variable "container_port" {
-  default = 5000
+  description = "The port your container will listen on"
+  default     = 5000
 }
 
 variable "image_tag" {
