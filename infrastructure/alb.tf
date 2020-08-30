@@ -26,3 +26,20 @@ resource "aws_alb_listener" "http" {
     type             = "forward"
   }
 }
+
+resource "aws_cloudwatch_metric_alarm" "alb_unhealthy_hosts" {
+  alarm_name          = "${var.name}-${var.env}-alb-unlhealthy-hosts"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods  = 1 # 5 Minutes
+  metric_name         = "UnHealthyHostCount"
+  namespace           = "AWS/ApplicationELB"
+  period              = "300" # 5 minutes
+  statistic           = "Average"
+  threshold           = "2"
+  actions_enabled     = false
+  alarm_description   = "Monitors ${var.name}-${var.env}-alb for unhealthy hosts"
+
+  dimensions = {
+    TargetGroup = aws_alb_target_group.main.arn_suffix
+  }
+}

@@ -15,7 +15,7 @@ resource "aws_cloudwatch_metric_alarm" "cpu" {
   alarm_description   = "Monitors ${var.name}-${var.env} for continued high CPU percentage"
 
   dimensions = {
-    ClusterName = "${var.name}-${var.env}"
+    ServiceName = "${var.name}-${var.env}"
   }
 }
 
@@ -32,7 +32,7 @@ resource "aws_cloudwatch_metric_alarm" "memory" {
   alarm_description   = "Monitors ${var.name}-${var.env} for continued high Memory percentage"
 
   dimensions = {
-    ClusterName = "${var.name}-${var.env}"
+    ServiceName = "${var.name}-${var.env}"
   }
 }
 
@@ -49,6 +49,6 @@ resource "aws_cloudwatch_metric_alarm" "running" {
   alarm_description   = "Monitors ${var.name}-${var.env} for <=1 running task"
 
   dimensions = {
-    ClusterName = "${var.name}-${var.env}"
+    ServiceName = "${var.name}-${var.env}"
   }
 }
