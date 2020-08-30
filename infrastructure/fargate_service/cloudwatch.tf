@@ -6,7 +6,7 @@ resource "aws_cloudwatch_metric_alarm" "cpu" {
   alarm_name          = "${var.name}-${var.env}-high-cpu"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = 2 # 10 Minutes
-  metric_name         = "CPUUtilized"
+  metric_name         = "CpuUtilized"
   namespace           = "ECS/ContainerInsights"
   period              = "300" # 5 minutes
   statistic           = "Average"
@@ -16,6 +16,7 @@ resource "aws_cloudwatch_metric_alarm" "cpu" {
 
   dimensions = {
     ServiceName = "${var.name}-${var.env}"
+    ClusterName = "${var.name}-${var.env}"
   }
 }
 
@@ -23,7 +24,7 @@ resource "aws_cloudwatch_metric_alarm" "memory" {
   alarm_name          = "${var.name}-${var.env}-high-memory"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = 2 # 10 Minutes
-  metric_name         = "CPUUtilized"
+  metric_name         = "MemoryUtilized"
   namespace           = "ECS/ContainerInsights"
   period              = "300" # 5 minutes
   statistic           = "Average"
@@ -33,6 +34,7 @@ resource "aws_cloudwatch_metric_alarm" "memory" {
 
   dimensions = {
     ServiceName = "${var.name}-${var.env}"
+    ClusterName = "${var.name}-${var.env}"
   }
 }
 
@@ -50,5 +52,6 @@ resource "aws_cloudwatch_metric_alarm" "running" {
 
   dimensions = {
     ServiceName = "${var.name}-${var.env}"
+    ClusterName = "${var.name}-${var.env}"
   }
 }

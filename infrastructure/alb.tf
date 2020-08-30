@@ -40,6 +40,7 @@ resource "aws_cloudwatch_metric_alarm" "alb_unhealthy_hosts" {
   alarm_description   = "Monitors ${var.name}-${var.env}-alb for unhealthy hosts"
 
   dimensions = {
-    TargetGroup = aws_alb_target_group.main.arn_suffix
+    TargetGroup  = aws_alb_target_group.main.arn_suffix
+    LoadBalancer = aws_lb.main.arn_suffix
   }
 }
