@@ -7,6 +7,7 @@
   * [Usage](#usage)
   * [Creating a new version](#creating-a-new-version)
   * [Documentation](#documentation)
+  * [TODO](#todo)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
@@ -74,3 +75,16 @@ Further documentation can be found within each subfolder of this repo:
 - [Fargate Module](infrastructure/fargate_service/)
 - [VPC Module](infrastructure/vpc/)
 - [Code](code/)
+
+---
+## TODO
+- add ALB access logging to an encrypted bucket
+- start using https
+- encrypt ACR with KMS key
+- Use Sonarqube or some kind of static code analysis
+- Check for container vulnerabilities before deploying
+- Make it so the Cloudwatch alarms actually send an alert
+- Test terraform code before applying
+- Make the fargate_service module better (more options, less specific to hello-world)
+- Actually test Jenkins
+
