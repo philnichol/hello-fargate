@@ -69,7 +69,26 @@ module "vpc" {
   name            = var.name
   env             = var.env
   vpc_cidr        = "10.0.0.0/16"
-  public_subnets  = var.public_subnets
-  private_subnets = var.private_subnets
+  public_subnets = [
+    {
+      cidr_block        = "10.0.0.0/24"
+      availability_zone = "eu-west-1a"
+    },
+    {
+      cidr_block        = "10.0.1.0/24"
+      availability_zone = "eu-west-1b"
+    }
+  ]
+
+  private_subnets = [
+    {
+      cidr_block        = "10.0.100.0/24"
+      availability_zone = "eu-west-1a"
+    },
+    {
+      cidr_block        = "10.0.101.0/24"
+      availability_zone = "eu-west-1b"
+    }
+  ]
 }
 ```
