@@ -4,10 +4,6 @@ FROM python:3.7.7-alpine3.11 AS build-image
 
 LABEL maintainer=philnichol
 
-# this is where the Makefile looks for the image tag
-# version consists of: <PYTHON_VERSION>.<ALPINE_VERSION>.<APP_VERSION>
-LABEL IMAGE_VERSION=377.311.2
-
 RUN python3 -m venv /opt/venv
 
 RUN apk add gcc musl-dev
@@ -52,5 +48,9 @@ WORKDIR /app
 COPY . .
 
 USER app
+
+# this is where the Makefile looks for the image tag
+# version consists of: <PYTHON_VERSION>.<ALPINE_VERSION>.<APP_VERSION>
+LABEL IMAGE_VERSION=377.311.3
 
 ENTRYPOINT [ "/opt/venv/bin/flask", "run", "--host", "0.0.0.0"]
