@@ -19,3 +19,8 @@ module "fargate" {
   repo_url         = aws_ecr_repository.ecr.repository_url
   image_tag        = var.image_tag
 }
+
+resource "local_file" "alb_dns_name" {
+  content  = aws_lb.main.dns_name
+  filename = "${path.module}/.alb_dns_name"
+}

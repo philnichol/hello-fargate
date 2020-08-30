@@ -1,6 +1,6 @@
 name      = "hello-ctm"
 env       = "dev"
-image_tag = "0.0.1"
+image_tag = "377.311.2"
 region    = "eu-west-1"
 public_subnets = [
   {
