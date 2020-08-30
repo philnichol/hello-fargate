@@ -11,7 +11,7 @@ def hello():
     greeting = environ.get("GREETING", "hello CTM!")
     time_format = environ.get("TIME_FORMAT", "%d/%m/%Y, %H:%M:%S")
     now = datetime.now().strftime(time_format)
-    return f"{greeting}, it is {now}\n"
+    return f"{greeting} It is {now}\n"
 
 
 if __name__ == "__main__":

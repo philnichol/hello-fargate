@@ -68,12 +68,12 @@ variable "image_tag" {
 variable "greeting" {
   type        = string
   description = "The greeting for your hello world app"
-  default     = "Hello CTM!"
+  default     = "Hello CTM!!"
 }
 
 variable "time_format" {
   type        = string
-  description = "The timeformat ou want displayed"
+  description = "The timeformat you want displayed"
   default     = "%d/%m/%Y, %H:%M:%S"
 }
 

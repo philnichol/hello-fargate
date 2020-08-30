@@ -33,7 +33,7 @@ I don't have a Jenkins instance to test on, so not sure it will work, but it sho
 ---
 ## Usage
 
-In addition to be being authenticated to AWS, the following ENVVARS must be set:
+In addition to be being authenticated to AWS and having permission to deploy the resources, the following ENVVARS must be set:
 - AWS_DEFAULT_REGION
 - AWS_ACCOUNT_NUMBER
 
