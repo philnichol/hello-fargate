@@ -1,12 +1,21 @@
+define check_url
+	curl -k -s -o /dev/null \
+		--write-out %{http_code} \
+		$(1) \
+		| grep 200 \
+		|| exit 1
+endef
+
 # get envvars from tfvars
 name = $(shell grep -e name infrastructure/terraform.tfvars | cut -d '=' -f 2 | tr -d '[:space:]' | tr -d '\"')
 env = $(shell grep -e env infrastructure/terraform.tfvars | cut -d '=' -f 2 | tr -d '[:space:]' | tr -d '\"')
-image_tag = $(shell grep -e image_tag infrastructure/terraform.tfvars | cut -d '=' -f 2 | tr -d '[:space:]' | tr -d '\"')
+image_tag = $(shell grep -e IMAGE_VERSION code/Dockerfile | cut -d '=' -f 2 | tr -d '[:space:]' | tr -d '\"')
 region = $(shell grep -e region infrastructure/terraform.tfvars | cut -d '=' -f 2 | tr -d '[:space:]' | tr -d '\"')
 
 # ensure requirements are installed
 checkdependencies:
 	which aws \
+		&& which curl \
 		&& which docker \
 		&& which python3 \
 		&& which terraform \
@@ -95,11 +104,22 @@ tfdestroy:
 		|| exit 1; \
 		popd
 
+
+test: 
+	$(call check_url,$(shell cat infrastructure/.alb_dns_name))
+
 prep: checkdependencies checkvariables
 
-runlocal: prep codebuild
-	docker run -d -p 5000:5000 $(full_image_path)
+codetest: prep codebuild
+	docker run -it --entrypoint='' $(full_image_path) black --diff --check . \
+	&& docker run -it --entrypoint='' $(full_image_path) flake8 --exclude .git,__pycache__,.venv . \
+	&& docker run -it --entrypoint='' $(full_image_path) bandit -r . \
+	&& docker run -d -p 5000:5000 --name flasklocaltest $(full_image_path) \
+	&& sleep 5 \
+	&& $(call check_url,127.0.0.1:5000) \
+	&& docker stop flasklocaltest \
+	&& docker rm flasklocaltest
 
 destroy: prep tfinit tfdestroy
 
-all: prep tffmt tfinit tfvalidate tfecrapply codelogin codebuild codepush tfapply
+all: prep tffmt tfinit tfvalidate tfecrapply codetest codepush tfapply test

@@ -26,7 +26,6 @@ pipeline {
                         make tffmt
                         make tfinit
                         make tfvalidate
-                        make codelogin
                     '''
                 }
             }
@@ -44,14 +43,22 @@ pipeline {
                 }
             }
         }
-        stage("BuildCode") {
+        stage("BuildandTestCode") {
+            // don't build this in a container since docker in docker can cause issues
+            agent {
+                label "docker"
+            }
             steps {
                 sh '''
-                    make codebuild
+                    make codetest
                 '''
             }
         }
         stage("PushCode") {
+            // don't run this in a container since docker in docker can cause issues
+            agent {
+                label "docker"
+            }
             // only actually push when on main branch
             when {
                 branch 'main'
@@ -59,6 +66,7 @@ pipeline {
             steps {
                 withCredentials(${AWS_CREDENTIALS}) {
                     sh '''
+                        make codelogin
                         make codepush
                     '''
                 }
@@ -75,6 +83,17 @@ pipeline {
                         make tfapply
                     '''
                 }
+            }
+        }
+        stage("ActualResultTest") {
+            // only run when on main branch
+            when {
+                branch 'main'
+            }
+            steps {
+                sh '''
+                    make test
+                '''
             }
         }
     }

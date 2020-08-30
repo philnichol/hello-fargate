@@ -1,5 +1,16 @@
 # hello-ctm
+- [hello-ctm](#hello-ctm)
+  * [The task](#the-task)
+  * [Diagram](#diagram)
+  * [My solution](#my-solution)
+  * [Pipeline](#pipeline)
+  * [Usage](#usage)
+  * [Creating a new version](#creating-a-new-version)
+  * [Documentation](#documentation)
 
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
+---
 ## The task
 Create a clustered web service in AWS that responds to a GET request with "hello world" and the date and time.
 
@@ -38,8 +49,7 @@ cd hello-ctm
 
 To build and run the flask container locally:
 ```shell
-make runlocal
-curl 127.0.0.1:5000/
+make codetest
 ```
 
 To deploy all infra (with prompt for confirmation):
@@ -51,6 +61,11 @@ To destroy the infra (with prompt for confirmation):
 ```shell
 make destroy
 ```
+
+---
+## Creating a new version
+- The version of the image you are pushing to ECR is set in the dockerfile as the LABEL IMAGE_VERSION.
+- The version of the image deployed to fargate is defined in infrastructure/terraform.tfvars
 
 ---
 ## Documentation
