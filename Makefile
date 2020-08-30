@@ -120,6 +120,9 @@ codetest: prep codebuild
 	&& docker stop flasklocaltest \
 	&& docker rm flasklocaltest
 
+wait:
+	sleep 15
+
 destroy: prep tfinit tfdestroy
 
-all: prep tffmt tfinit tfvalidate tfecrapply codetest codepush tfapply test
+all: prep tffmt tfinit tfvalidate tfecrapply codetest codepush tfapply wait test
