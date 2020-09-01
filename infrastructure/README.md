@@ -8,7 +8,7 @@ This repo houses the infrastructure for Hello-CTM, it mainly consists of:
 - 1 ECS cluster with a single service running
 - Security groups
 - IAM roles
-- CloudWatch alerts for >75% CPU and memory, and if there's ever only 1 or less tasks running
+- CloudWatch alerts for >75% CPU and memory, if there's ever only 1 or less tasks running, or if there's 1 or less healthy targets in the ALB TG.
 
 ## Backend
 While testing locally the statefile is stored locally, but for a proper environment it would be stored in S3.
