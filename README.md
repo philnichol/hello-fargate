@@ -17,7 +17,7 @@ Create a clustered web service in AWS that responds to a GET request with "hello
 
 ---
 ## Diagram
-![alt text](hello-fargate.png "Diagram")
+![alt text](hello-ctm.png "Diagram")
 
 ---
 ## My solution
