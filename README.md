@@ -1,5 +1,5 @@
-# hello-ctm
-- [hello-ctm](#hello-ctm)
+# hello-fargate
+- [hello-fargate](#hello-fargate)
   * [The task](#the-task)
   * [Diagram](#diagram)
   * [My solution](#my-solution)
@@ -17,7 +17,7 @@ Create a clustered web service in AWS that responds to a GET request with "hello
 
 ---
 ## Diagram
-![alt text](hello-ctm.png "Diagram")
+![alt text](hello-fargate.png "Diagram")
 
 ---
 ## My solution
@@ -44,8 +44,8 @@ The following applications must be installed:
 
 Clone the repo:
 ```shell
-git clone https://github.com/philnichol/hello-ctm.git
-cd hello-ctm
+git clone https://github.com/philnichol/hello-fargate.git
+cd hello-fargate
 ```
 
 To build and run the flask container locally:
